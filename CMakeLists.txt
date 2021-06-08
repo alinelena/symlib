@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0.0)
 
 project(symlib
-	VERSION 0.0.1
+	VERSION 2.0.1
 	HOMEPAGE_URL https://github.com/msg-byu/symlib
 	LANGUAGES Fortran)
 

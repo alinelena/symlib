@@ -116,7 +116,8 @@ CONTAINS
           err_ = 0
        end if
     else
-       if ((any(abs(real(A,dp)) > 1E17)) .or. (any(abs(real(B,dp)) > 1E17))) stop "Warning Values in SmithNormalForm overflowing standard ints."
+       if ((any(abs(real(A,dp)) > 1E17)) .or. (any(abs(real(B,dp)) > 1E17))) then 
+         stop "Warning Values in SmithNormalForm overflowing standard ints."; endif
     end if
   ENDSUBROUTINE SmithNormalForm_Li
 
