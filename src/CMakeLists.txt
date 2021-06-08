@@ -1,16 +1,4 @@
-# Spacegroup finder, enumeration support functions
-add_library(sym
-	symmetry.f90
-	group_theory.f90
-	itertools.f90
-	classes.f90
-	utilities.f90
-	num_types.f90
-	numerical_utilities.f90
-	vector_matrix_utilities.f90
-	)
-
-# Reallocation of dynamic variables, 3x3 inverse, determinant, mink reduction, etc.	
+# Reallocation of dynamic variables, 3x3 inverse, determinant, mink reduction, etc.
 add_library(utils
 	num_types.f90
 	utilities.f90
@@ -18,28 +6,35 @@ add_library(utils
   vector_matrix_utilities.f90
 	)
 
-# gcd, SmithNormalForm, HermiteNormalForm, etc.	
+# Spacegroup finder, enumeration support functions
+add_library(sym
+	symmetry.f90
+	group_theory.f90
+	itertools.f90
+	classes.f90
+	)
+target_link_libraries(sym PUBLIC utils)
+
+# gcd, SmithNormalForm, HermiteNormalForm, etc.
 add_library(rational
-	numerical_utilities.f90
-	utilities.f90
-	vector_matrix_utilities.f90
-	num_types.f90
 	rational_mathematics.f90
 	)
+target_link_libraries(rational PUBLIC utils)
 
-# General combinatorics functions like nchoosek, M permutations of N things, stable binomials, etc.	
+# General combinatorics functions like nchoosek, M permutations of N things, stable binomials, etc.
 add_library(combinatorics
 	combinatorics.f90
 )
+target_link_libraries(combinatorics PUBLIC rational)
 
 # This library is useful for checking the equivalence of enumerated structures which have different representations. Not used very often anymore but still useful.
 add_library(compare_structures
-
+  compare_structures.f90
 )
+target_link_libraries(compare_structures PUBLIC sym)
 
 # This exe is needed to generate spacegroup information for tests of enumlib. This is a one-off code but could be adjusted for a more general purpose, stand-alone spacegroup finder
 add_executable(spacegroup4fortpy.x
-  symmetry.f90
   spacegroup.f90
 )
 
@@ -48,7 +43,7 @@ add_executable(spacegroup4fortpy.x
 # symdriver.f90
 #)
 
-target_link_libraries(spacegroup4fortpy.x utils)
+target_link_libraries(spacegroup4fortpy.x sym)
 #target_link_libraries(sym.x sym)
 
 install(TARGETS spacegroup4fortpy.x  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
