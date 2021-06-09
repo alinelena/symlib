@@ -1,29 +1,29 @@
 # Reallocation of dynamic variables, 3x3 inverse, determinant, mink reduction, etc.
 add_library(utils
-	num_types.f90
-	utilities.f90
-	numerical_utilities.f90
+  num_types.f90
+  utilities.f90
+  numerical_utilities.f90
   vector_matrix_utilities.f90
-	)
+  )
 
 # Spacegroup finder, enumeration support functions
 add_library(sym
-	symmetry.f90
-	group_theory.f90
-	itertools.f90
-	classes.f90
-	)
+  symmetry.f90
+  group_theory.f90
+  itertools.f90
+  classes.f90
+  )
 target_link_libraries(sym PUBLIC utils)
 
 # gcd, SmithNormalForm, HermiteNormalForm, etc.
 add_library(rational
-	rational_mathematics.f90
-	)
+  rational_mathematics.f90
+  )
 target_link_libraries(rational PUBLIC utils)
 
 # General combinatorics functions like nchoosek, M permutations of N things, stable binomials, etc.
 add_library(combinatorics
-	combinatorics.f90
+  combinatorics.f90
 )
 target_link_libraries(combinatorics PUBLIC rational)
 
